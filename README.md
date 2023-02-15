@@ -1,0 +1,11 @@
+# Compare and Visualize Word Embedding Techinues  
+- It contains python script that trains and visualize popular word embedding techniques such as:
+    - CountVectorizer, TfidfVectorizer
+    - Word2Vec, FastText, Glove
+    - BERT embeddings
+- It uses following python packages:
+    - `numpy`: for array processing, and matrix-vector operations
+    -  `matplotlib`: for visualization (word embedding in our case)
+    - `gensim`
+    - `sickit-learn`
+    - `transformers`
