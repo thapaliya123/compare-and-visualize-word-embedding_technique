@@ -1,4 +1,4 @@
-# Compare and Visualize Word Embedding Techinues  
+# Compare and Visualize Word Embedding Techniques  
 - It contains python script that trains and visualize popular word embedding techniques such as:
     - CountVectorizer, TfidfVectorizer
     - Word2Vec, FastText, Glove
