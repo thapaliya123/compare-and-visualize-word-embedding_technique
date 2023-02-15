@@ -6,6 +6,8 @@
 - It uses following python packages:
     - `numpy`: for array processing, and matrix-vector operations
     -  `matplotlib`: for visualization (word embedding in our case)
-    - `gensim`
-    - `sickit-learn`
-    - `transformers`
+    - `gensim`: for loading pretrained Word2Vec, KeyedVector(Glove)
+    - `sickit-learn`: for data preprocessing, modeling, and evaluation
+    - `transformers`: for loading state-of-the-art models for natural language processing, including BERT and other contextualized word embedding models.
+- We will compare the embeddings by selecting a set of words and retrieving their embeddings using each techniques mentioned above.
+- Finally, we will visualize embeddings generated for each word using Matplotlib.
