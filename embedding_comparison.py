@@ -17,6 +17,19 @@ class EmbeddingComparison:
         }
         self.word_vectors = None
 
+    def compute_bow_tfidf_vectors(self, vector_type):
+        if vector_type == 'BOW':
+            vectorizer = CountVectorizer()
+        elif vector_type == 'tfidf':
+            vectorizer = TfidfVectorizer()
+        else:
+            raise ValueError("Invalid vector type. Supported vector types: BOW, TF-IDF")
+        
+        vectors = vectorizer.fit_transform(self.corpus).toarray()
+        self.embeddings[vector_type] = vectors
+
+        return vectors, vectorizer.vocabulary_
+
 
     def train_classical_word_embedding(self, model_type, **kwargs):
         if model_type == 'Word2Vec':
@@ -32,3 +45,10 @@ class EmbeddingComparison:
             raise ValueError(f'Unknown embedding type: {model_type}')
         
         return model_type
+
+    def load_bert_model(self, model_name):
+        self.embeddings['Bert'] = BertModel.from_pretrained(model_name)
+        self.tokenizer = BertTokenizer.from_pretrained(model_name)
+
+    def compute_bert_vectors(self):
+        pass
