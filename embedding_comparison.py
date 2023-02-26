@@ -52,3 +52,10 @@ class EmbeddingComparison:
 
     def compute_bert_vectors(self):
         pass
+
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
