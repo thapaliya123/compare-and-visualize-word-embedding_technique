@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import gdown
 import shutil
@@ -7,16 +6,7 @@ from gensim.models import Word2Vec, FastText, KeyedVectors
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from transformers import BertTokenizer, BertModel
 
-
-def delete_file(file_path):
-    # delete existing files
-    print('Deleting existing files!!!')
-    try:
-        if os.path.isfile(file_path):
-            os.unlink(file_path)
-            print(f"Deleted {file_path}")
-    except Exception as e:
-        print(f"Error deleting {file_path}: {e}")
+from helpers import delete_file
 
 class EmbeddingComparison:
     def __init__(self, corpus=None, pretrained_word2vec=None, pretrained_glove=None) -> None:
