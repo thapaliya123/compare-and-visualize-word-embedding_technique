@@ -1,2 +1,3 @@
 test_notebook.ipynb
-venv
+venv  
+models/GoogleNews-vectors-negative300.bin
