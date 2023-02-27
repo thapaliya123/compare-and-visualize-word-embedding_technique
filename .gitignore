@@ -1,3 +1,6 @@
 test_notebook.ipynb
 venv  
-models/GoogleNews-vectors-negative300.bin
+GoogleNews-vectors-negative300.bin
+GoogleNews-vectors-negative300.bin.gz
+.pylintrc
+__pycache__/

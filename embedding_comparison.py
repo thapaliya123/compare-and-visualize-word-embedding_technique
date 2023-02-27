@@ -1,7 +1,6 @@
-import numpy as np
-import gdown
 import shutil
 import gzip
+import gdown
 from gensim.models import Word2Vec, FastText, KeyedVectors
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from transformers import BertTokenizer, BertModel
@@ -31,31 +30,29 @@ class EmbeddingComparison:
             vectorizer = TfidfVectorizer()
         else:
             raise ValueError("Invalid vector type. Supported vector types: BOW, TF-IDF")
-        
         vectors = vectorizer.fit_transform(self.corpus).toarray()
         self.embeddings[vector_type] = vectors
-
         return vectors, vectorizer.vocabulary_
     
     def download_pretrained_wordvec(self):
-        
         # Delete existing files before downloading new file
         delete_file(self.pretrained_word2vec)
-    
         # Download the pretrained word2vec model
         gdrive_file_id = "0B7XkCwpI5KDYNlNUTTlSS21pQmM"
-        
+        zip_file_name = 'GoogleNews-vectors-negative300.bin.gz'
         print("Downloading Pretrained Word2Vec from Google Drive!!!!!")
         url = f"https://drive.google.com/u/1/uc?id={gdrive_file_id}&export=download"
-        gdown.download(url, self.pretrained_word2vec)
+        gdown.download(url, zip_file_name)
 
         print("Unzip and save pretrained Word2Vec!!!")
 
         # Unzip the downloaded file
-        with gzip.open(self.pretrained_word2vec, 'rb') as f_in:
-            with open(self.pretrained_word2vec, 'wb') as f_out:
+        with gzip.open(zip_file_name, 'rb') as f_in:
+            with open('GoogleNews-vectors-negative300.bin', 'wb') as f_out:
                 shutil.copyfileobj(f_in, f_out)
-
+        
+        print('Deleting word2vec zip file!!!!')
+        # delete_file(zip_file_name)
 
     def load_pretrained_word2vec(self):
         """
@@ -63,7 +60,9 @@ class EmbeddingComparison:
         """
         try:
             print("Loading Pretrained Word2Vec from directory!!!")
-            self.embeddings['word2vec'] = KeyedVectors.load_word2vec_format(self.pretrained_word2vec, binary=True)
+            file_name = 'GoogleNews-vectors-negative300.bin'
+            self.embeddings['word2vec'] = KeyedVectors.load_word2vec_format\
+                                                    (file_name, binary=True)
         except FileNotFoundError:
             print("Miss pretrained Word2Vec file.")
             self.download_pretrained_wordvec()
