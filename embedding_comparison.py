@@ -10,6 +10,8 @@ from helpers import delete_file
 class EmbeddingComparison:
     def __init__(self, corpus=None, pretrained_word2vec=None, pretrained_glove=None) -> None:
         self.corpus = corpus
+        self.pretrained_word2vec = pretrained_word2vec
+        self.pretrained_glove = pretrained_glove
         self.words = ['apple', 'orange', 'banana', 'car', 'bus', 'train']
         self.embeddings = {
             'word2vec': None,
@@ -19,8 +21,6 @@ class EmbeddingComparison:
             'tf-idf': None,
             'bert': None
         }
-        self.pretrained_word2vec = "models/GoogleNews-vectors-negative300.bin"
-        self.pretrained_glove = pretrained_glove
         self.word_vectors = None
 
     def compute_bow_tfidf_vectors(self, vector_type):
@@ -55,18 +55,23 @@ class EmbeddingComparison:
         # delete_file(zip_file_name)
 
     def load_pretrained_word2vec(self):
-        """
+        """      
+        
         Load pretrained word2vec model from downloaded path location.
+
+        Arguments:
+            self: class object
         """
         try:
             print("Loading Pretrained Word2Vec from directory!!!")
-            file_name = 'GoogleNews-vectors-negative300.bin'
+            file_name = self.pretrained_word2vec
             self.embeddings['word2vec'] = KeyedVectors.load_word2vec_format\
                                                     (file_name, binary=True)
         except FileNotFoundError:
-            print("Miss pretrained Word2Vec file.")
-            self.download_pretrained_wordvec()
-            self.load_pretrained_word2vec()
+            print("Miss pretrained Word2Vec file. please download 'GoogleNews-vectors-negative300.bin' \
+                  and set environment variables")
+            # self.download_pretrained_wordvec()
+            # self.load_pretrained_word2vec()
 
     def download_pretrained_glove(self):
         pass
