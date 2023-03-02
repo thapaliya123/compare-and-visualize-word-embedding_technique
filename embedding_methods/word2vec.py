@@ -1,5 +1,6 @@
 import gensim
 
+# TODO: inherit from visualize embeddings class
 class Word2Vec:
     '''
     class to load word2vec model and perform some mathematical operations on words
@@ -29,7 +30,14 @@ class Word2Vec:
         except Exception as e:
             print(f"Error loading pretrained Word2Vec models. Exception is:\n{e}")
             return None
+    
+    def get_embeddings(self, model, word_list):
+        """
+        get embeddings from the model passed
+        """
+        pass
 
+        
 def main():
     word2vec_path = '../GoogleNews-vectors-negative300.bin'
     sample_word = 'bank'

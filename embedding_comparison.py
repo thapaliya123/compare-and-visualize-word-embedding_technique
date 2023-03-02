@@ -5,7 +5,7 @@ from gensim.models import Word2Vec, FastText, KeyedVectors
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from transformers import BertTokenizer, BertModel
 
-from helpers import delete_file
+from utils.helpers import delete_file
 
 class EmbeddingComparison:
     def __init__(self, corpus=None, pretrained_word2vec=None, pretrained_glove=None) -> None:
