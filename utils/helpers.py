@@ -1,4 +1,20 @@
 import os 
+import array
+
+import plotly.express as px
+from sklearn.decomposition import PCA
+
+def apply_pca(data: array, dim=2):
+    # Use pca to reduce dimensionality
+    pca = PCA(n_components=dim)
+    data = pca.fit_transform(data)
+    return data
+
+def create_plotly_scatter_plot(df, x_data, y_data, color_name=None, hover_name=None, width=800, height=600):
+    # create scatter plot using plotly
+    fig = px.scatter(df, x=x_data, y=y_data, color=color_name, hover_name=hover_name, width=width, height=height)
+    fig.show()
+
 
 def delete_file(file_path):
     # delete existing files

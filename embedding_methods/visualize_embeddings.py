@@ -1,5 +1,5 @@
-
 import array
+import utils
 
 class VisualizeEmbeddings:
     def __init__(self, model_name: str, word_vectors: array, word_contexts: list) -> None:
@@ -16,3 +16,9 @@ class VisualizeEmbeddings:
         self.model_name = model_name
         self.word_vectors = word_vectors
         self.word_contexts = word_contexts
+
+    def visualize_word_embeddings(self):
+        word_vectors = utils.apply_pca(self.word_vectors)
+
+        # Plot the embeddings in Scatter plot
+        utils.create_plotly_scatter_plot()
