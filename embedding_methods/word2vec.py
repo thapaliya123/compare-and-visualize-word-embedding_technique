@@ -1,3 +1,4 @@
+import numpy as np
 import gensim
 from embedding_methods.visualize_embeddings import VisualizeEmbeddings
 
@@ -13,6 +14,7 @@ class Word2Vec(VisualizeEmbeddings):
         Args:
             pretrained_model_path (str): Local path for pretrained word2vec model
         """
+        super().__init__(model_name='word2vec')
         self.pretrained_model_path = pretrained_model_path
         self.model = None
 
@@ -37,24 +39,35 @@ class Word2Vec(VisualizeEmbeddings):
         """
         get embeddings from the model passed
         """
-        self.word2vec_model = self.load_model()
+        assert self.word2vec_model != None, "pretrained word2vec model is not loaded!!!"
+
         word_vector = self.word2vec_model[word]
     
         return word_vector
         
-    def __call__(self, word):
-        word_vector = self.get_embeddings(word)
-        return word_vector
+    def __call__(self, word_list):
+        
+        # load pretrained word2vec model
+        self.word2vec_model = self.load_model()
+
+        # get word2vec embeddings
+        word_vector_arr = np.array([self.get_embeddings(word) for word in word_list])
+
+        # self.visualize_word_embeddings(word_vector_arr, )
+
+        return word_vector_arr
         
 
 def main():
     word2vec_path = '../GoogleNews-vectors-negative300.bin'
     word2vec_path = '/home/fm-pc-lt-125/Documents/personal/compare-and-visualize-word-embedding_technique/GoogleNews-vectors-negative300.bin'
     word_contexts = [('bank', 'river bank'), ('bank', 'bank account'), ('deposit', 'bank deposit'), ('withdrawal', 'bank withdrawal')]
+    words, contexts = zip(*word_contexts)
+
     # word2vec = Word2Vec(word2vec_path)
     # word2vec_model = word2vec.load_model()
     word2vec = Word2Vec(word2vec_path)
-    print(word2vec(word_contexts[0][0]))
+    print(word2vec(words))
     exit()
     model_ = word2vec.load_model()
     print("generating embeddings from word2vec!!!")
