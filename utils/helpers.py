@@ -2,6 +2,7 @@ import os
 import array
 
 import plotly.express as px
+import plotly.io as pio
 from sklearn.decomposition import PCA
 
 def apply_pca(data: array, dim=2):
@@ -10,10 +11,15 @@ def apply_pca(data: array, dim=2):
     data = pca.fit_transform(data)
     return data
 
-def create_plotly_scatter_plot(df, x_data, y_data, color_name=None, hover_name=None, width=800, height=600):
+def create_plotly_scatter_plot(df, x_data, y_data, color_name=None, hover_name=None, width=800, height=600, save_path=None):
     # create scatter plot using plotly
     fig = px.scatter(df, x=x_data, y=y_data, color=color_name, hover_name=hover_name, width=width, height=height)
-    fig.show()
+    if save_path is not None:
+        print(f'Saving plot in path:\n {save_path}')
+        # pio.write_image(fig, save_path)
+        pio.write_html(fig, save_path)
+    else:
+        fig.show()
 
 
 def delete_file(file_path):
