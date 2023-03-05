@@ -68,19 +68,7 @@ def main():
     # word2vec_model = word2vec.load_model()
     word2vec = Word2Vec(word2vec_path)
     print(word2vec(words))
-    exit()
-    model_ = word2vec.load_model()
-    print("generating embeddings from word2vec!!!")
-    word2vec_vectors = []
-    for word, context in word_contexts:
-        try:
-            print(word2vec_vectors.append(model_[word]))
-
-        except KeyError:
-            # If the word is not in the Word2Vec vocabulary, skip it
-            continue
-    print(word2vec_vectors)
-
+    
 if __name__ == '__main__':
     main()
 
