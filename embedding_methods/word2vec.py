@@ -2,7 +2,6 @@ import numpy as np
 import gensim
 from embedding_methods.visualize_embeddings import VisualizeEmbeddings
 
-# TODO: inherit from visualize embeddings class
 class Word2Vec(VisualizeEmbeddings):
     '''
     class to load word2vec model and perform some mathematical operations on words

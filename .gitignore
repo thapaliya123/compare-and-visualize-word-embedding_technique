@@ -3,4 +3,6 @@ GoogleNews-vectors-negative300.bin
 GoogleNews-vectors-negative300.bin.gz
 .pylintrc
 __pycache__/  
-notebooks
+notebooks  
+glove*.txt    
+glove.6B.zip
